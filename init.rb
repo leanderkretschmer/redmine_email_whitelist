@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_email_whitelist do
   name 'Redmine Email Whitelist'
   author 'Leander Kretschmer'
   description 'Plugin to whitelist and blacklist email domains for outgoing emails'
-  version '1.2.1'
+  version '1.0.0'
   url 'https://github.com/leanderkretschmer/redmine_email_whitelist'
   author_url 'https://github.com/leanderkretschmer'
   requires_redmine version_or_higher: '6.0.0'
@@ -17,13 +17,7 @@ end
 require_dependency 'mailer'
 module RedmineEmailWhitelist
   module MailerPatch
-    def self.included(base)
-      base.class_eval do
-        alias_method_chain :deliver_mail, :whitelist_check
-      end
-    end
-
-    def deliver_mail_with_whitelist_check(mail)
+    def deliver_mail(mail)
       # Get settings
       allowed_domains = Setting.plugin_redmine_email_whitelist['allowed_email_domains'].to_s.split(',').map(&:strip).reject(&:blank?)
       disallowed_domains = Setting.plugin_redmine_email_whitelist['disallowed_email_domains'].to_s.split(',').map(&:strip).reject(&:blank?)
@@ -43,7 +37,7 @@ module RedmineEmailWhitelist
 
       # Only deliver if there are still recipients
       if mail.to.present? || mail.cc.present? || mail.bcc.present?
-        deliver_mail_without_whitelist_check(mail)
+        super(mail)
       else
         Rails.logger.warn "Email blocked by whitelist/blacklist rules: #{mail.subject}"
       end
@@ -118,5 +112,5 @@ module RedmineEmailWhitelist
   end
 end
 
-# Apply the patch
-Mailer.send(:include, RedmineEmailWhitelist::MailerPatch)
+# Apply the patch using prepend (Rails 7 compatible)
+Mailer.prepend RedmineEmailWhitelist::MailerPatch
