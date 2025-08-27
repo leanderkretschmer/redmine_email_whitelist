@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Plugin-spezifische Gems
-gem 'rails', '~> 6.0'
+# Rails wird bereits vom Hauptsystem bereitgestellt
 
 group :development, :test do
   gem 'rspec-rails', '~> 4.0'
