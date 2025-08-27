@@ -1,15 +1,15 @@
 source 'https://rubygems.org'
 
 # Plugin-spezifische Gems
-# Rails und RuboCop werden bereits vom Hauptsystem bereitgestellt
+# Alle Gems werden bereits vom Hauptsystem oder anderen Plugins bereitgestellt
+# Keine zusätzlichen Abhängigkeiten erforderlich für dieses Plugin
 
-group :development, :test do
-  gem 'rspec-rails', '~> 4.0'
-  gem 'factory_bot_rails'
-  gem 'faker'
-end
+# group :development, :test do
+#   gem 'rspec-rails', '~> 4.0'
+#   gem 'factory_bot_rails'
+#   gem 'faker'
+# end
 
-# RuboCop wird bereits vom Hauptsystem bereitgestellt
 # group :development do
 #   gem 'rubocop', require: false
 #   gem 'rubocop-rails', require: false
