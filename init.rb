@@ -2,7 +2,11 @@ Redmine::Plugin.register :redmine_email_whitelist do
   name 'Redmine Email Whitelist'
   author 'Leander Kretschmer'
   description 'Plugin to whitelist and blacklist email domains for outgoing emails'
+<<<<<<< HEAD
   version '1.0.0'
+=======
+  version '1.2.3'
+>>>>>>> 8ec79329cbc22aae2fa7fffadbe19d8373cf039d
   url 'https://github.com/leanderkretschmer/redmine_email_whitelist'
   author_url 'https://github.com/leanderkretschmer'
   requires_redmine version_or_higher: '6.0.0'
