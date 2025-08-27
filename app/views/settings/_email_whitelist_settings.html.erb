@@ -1,0 +1,39 @@
+<div class="box tabular settings">
+  <h3>E-Mail-Domain-Beschränkungen</h3>
+  
+  <p>
+    <label for="settings_allowed_email_domains">Erlaubte E-Mail-Domains:</label>
+    <%= text_area_tag 'settings[allowed_email_domains]', 
+                      @settings['allowed_email_domains'], 
+                      :rows => 5, 
+                      :cols => 60,
+                      :placeholder => "Beispiel: example.com, *@trusted.com, user@specific.com" %>
+    <em class="info">
+      Mehrere Werte erlaubt (kommagetrennt). 
+      Beispiele: example.com (nur Domain), *@trusted.com (alle Benutzer einer Domain), user@specific.com (spezifische E-Mail-Adresse)
+    </em>
+  </p>
+  
+  <p>
+    <label for="settings_disallowed_email_domains">Nicht erlaubte E-Mail-Domains:</label>
+    <%= text_area_tag 'settings[disallowed_email_domains]', 
+                      @settings['disallowed_email_domains'], 
+                      :rows => 5, 
+                      :cols => 60,
+                      :placeholder => "Beispiel: spam.com, *@blocked.com, bad@example.com" %>
+    <em class="info">
+      Mehrere Werte erlaubt (kommagetrennt). 
+      Beispiele: spam.com (nur Domain), *@blocked.com (alle Benutzer einer Domain), bad@example.com (spezifische E-Mail-Adresse)
+    </em>
+  </p>
+  
+  <div class="info">
+    <h4>Hinweise zur Verwendung:</h4>
+    <ul>
+      <li><strong>Whitelist-Modus:</strong> Wenn erlaubte Domains angegeben sind, werden nur E-Mails an diese Domains versendet.</li>
+      <li><strong>Blacklist-Modus:</strong> Wenn nur nicht erlaubte Domains angegeben sind, werden alle E-Mails außer an diese Domains versendet.</li>
+      <li><strong>Kombinierter Modus:</strong> Wenn beide Listen angegeben sind, wird zuerst die Blacklist, dann die Whitelist geprüft.</li>
+      <li>E-Mails, die durch die Regeln blockiert werden, werden im Log protokolliert und nicht versendet.</li>
+    </ul>
+  </div>
+</div>
